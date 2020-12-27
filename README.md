@@ -3,7 +3,7 @@
 # About
 This supports sharing a monitor and Bluetooth keyboard between 2 Macs.
 
-Many modern bluetooth keyboards allow you to connect to multiple computers and select the current one via a keyboard shortcut.
+Many modern Bluetooth keyboards allow you to connect to multiple computers and select the current one via a keyboard shortcut.
 
 For example, I use a version of this [Keychron K1 keyboard](https://www.keychron.com/products/keychron-k1-wireless-mechanical-keyboard) and can use the "fn-1" and "fn-2" key combinations to connect the keyboard to my work or personal Mac.
 
@@ -28,7 +28,7 @@ make install
 ```
 
 ## blueutil
-To monitor Bluetooth connections will will use [blueutil](https://github.com/toy/blueutil).
+To monitor Bluetooth connections we will use [blueutil](https://github.com/toy/blueutil).
 
 To install this, just do:
 
@@ -37,7 +37,7 @@ brew install blueutil
 ```
 
 ## bluekvm
-The logic of this script is very simple -- wait for the specified device (the keyboard) to connect and then switch the monitor to this keyboard.
+The logic of this script is very simple -- wait for the specified device (the keyboard) to connect and then switch the monitor input to this computer.
 
 First, determine the MAC address of your keyboard and the choice of input for the computer.
 
@@ -72,7 +72,7 @@ First, determine the MAC address of your keyboard and the choice of input for th
     keyboard=dc-2c-26-d6-41-d2
     display1=18
     ``` 
-    Where the keyboard value is copied from the paired keyboard listed by blueutil and the display1 value is selected from the ddcctl table.  If you want a second display to also be switched, add another entry like `display2=18`
+    Where the keyboard value is copied from the paired keyboard listed by blueutil and the display1 value is selected from the ddcctl table.  If you want a second display to also be switched, add another entry like this: `display2=18`
 
 1. Copy the `bluekvm.sh` script to `/usr/local/bin`:
 
@@ -82,7 +82,7 @@ First, determine the MAC address of your keyboard and the choice of input for th
 
 1. Test the script:
 
-    Run it manually on each computer and switch your keyboard back and forth to verify the monitor switches appropriately.
+    Run it manually on each computer and switch your keyboard back and forth to verify the monitor switches inputs appropriately.
 
     ```
     /usr/local/bin/bluekvm.sh
@@ -127,5 +127,5 @@ rm ~/Library/LaunchAgents/bluekvm.plist
 
 
 
-### Copyright 2014 Mike Carlton
+### Copyright 2020 Mike Carlton
 Released under terms of the MIT License: http://carlton.mit-license.org/
