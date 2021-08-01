@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2020 Mike Carlton
+# Copyright 2020-2021 Mike Carlton
 #
 # Released under terms of the MIT License:
 #   http://carlton.mit-license.org/
@@ -11,7 +11,6 @@ echo2()
 }
 
 RCFILE="/usr/local/etc/bluekvm.rc"
-VERBOSE=0
 
 . "$RCFILE"
 
@@ -28,7 +27,12 @@ while true ; do
   else
     [[ "$VERBOSE" == 1 ]] && echo2 "waiting on connect"
     blueutil --wait-connect $keyboard
-    ddcctl -d 1 -i $display1 >/dev/null
-    [[ $display2 ]] && ddcctl -d 2 -i $display2 >/dev/null
+    if [[ $(uname -m) == "arm64" ]] ; then
+        m1ddc display 1 set input $display1
+        [[ $display2 ]] && m1ddc display 2 set input $display2
+    else
+        ddcctl -d 1 -i $display1 >/dev/null
+        [[ $display2 ]] && ddcctl -d 2 -i $display2 >/dev/null
+    fi
   fi
 done

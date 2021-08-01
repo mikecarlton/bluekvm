@@ -14,10 +14,13 @@ Ideally, you could also switch your Bluetooth mouse (or trackpad) when the keybo
 # Install
 You will need to do this on each computer you want to control.
 
-## ddcctl
-To control the monitor input selection we will use [ddcctl](https://github.com/kfix/ddcctl).  Unfortunately there is not yet a brew formula for this, so for now we will install from source.
+## Monitor Input Selection
+We rely on [ddcctl](https://github.com/kfix/ddcctl) (on Intel Macs) or [m1ddc](https://github.com/waydabber/m1ddc) (on M1 Macs) to switch the active input.   DDC support for M1 Macs has just recently been figured out by the community, so things are in a state of flux.  Ideally we would have one utility that worked on both flavors of Macs.
 
-You will need to install XCode first (if not installed), and this assumes you have an Intel GPU (check via the "Graphics" entry in "About This Mac").
+## ddcctl
+**Only if on Intel hardware** Unfortunately there is not yet a brew formula for this, so for now we will install from source.
+
+You will need to install XCode first (if not installed already), and this assumes you have an Intel GPU (check via the "Graphics" entry in "About This Mac").
 
 ```
 cd /tmp
@@ -25,6 +28,19 @@ git clone https://github.com/kfix/ddcctl.git
 cd ddctl
 make intel
 make install
+```
+
+## m1ddc
+**Only if on M1 hardware** Unfortunately there is not yet a brew formula for this, so for now we will install from source.
+
+You will need to install XCode first (if not installed already).
+
+```
+cd /tmp
+git clone https://github.com/waydabber/m1ddc
+cd m1ddc
+make
+sudo cp m1ddc /usr/local/bin
 ```
 
 ## blueutil
@@ -127,5 +143,5 @@ rm ~/Library/LaunchAgents/bluekvm.plist
 
 
 
-### Copyright 2020 Mike Carlton
+### Copyright 2020-2021 Mike Carlton
 Released under terms of the MIT License: http://carlton.mit-license.org/
